@@ -22,7 +22,9 @@ namespace KursUnitTest
         public void SetUp()
         {
             driver = new ChromeDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
         }
 
         /// <summary>
@@ -36,10 +38,11 @@ namespace KursUnitTest
         [Test]
         public void FirstTest()
         {
-            driver.Url = "http://www.Google.com";
-            driver.FindElement(By.Name("q")).SendKeys("webdriver");
-            driver.FindElement(By.Name("btnK")).Click();
-            wait.Until(ExpectedConditions.TitleIs("webdriver - Поиск в Google"));
+            driver.Url = "http://localhost/litecart/admin/login.php";
+            driver.FindElement(By.Name("username")).SendKeys("admin");
+            driver.FindElement(By.Name("password")).SendKeys("admin");
+            driver.FindElement(By.Name("login")).Click();
+            driver.FindElement(By.CssSelector("a[title='Logout']")).Click();
         }
 
         /// <summary>
