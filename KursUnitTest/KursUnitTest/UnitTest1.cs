@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 namespace KursUnitTest
@@ -21,7 +24,14 @@ namespace KursUnitTest
         [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            //options.AddArgument("--headless");//hide browser
+            driver = new ChromeDriver(options);
+            //driver = new EdgeDriver();
+            //EdgeOptions option = new EdgeOptions();
+            //FirefoxOptions options = new FirefoxOptions();
+            //options.AddArgument("--headless");
+            //driver = new FirefoxDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
