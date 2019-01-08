@@ -11,54 +11,13 @@ using System.Threading.Tasks;
 namespace KursUnitTest
 {
     [TestFixture]
-    class Test2
+    class Test2 : BaseTest
     {
-        private IWebDriver driver;
-        private WebDriverWait wait;
-
-        /// <summary>
-        /// функция выполняется перед каждым тестом
-        /// </summary>
-        [SetUp]
-        public void SetUp()
-        {
-            ChromeOptions options = new ChromeOptions();
-            driver = new ChromeDriver(options);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
-        }
-
-        /// <summary>
-        /// функция выполняется перед каждым тестом
-        /// </summary>
-        [OneTimeSetUp]
-        public void OnOneTimeSetUp()
-        {
-        }
-
+        
         [Test]
         public void FirstTest()
         {
             driver.Url = "http://pskovline.ru";
-        }
-
-        /// <summary>
-        /// функция выполняется после каждого теста
-        /// </summary>
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Quit();
-            driver = null;
-        }
-
-        /// <summary>
-        /// функция выполняется после каждого теста
-        /// </summary>
-        [OneTimeTearDown]
-        public void OnOneTimeTearDown()
-        {
         }
     }
 }
