@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Zadanie9.cs" />
     <Compile Include="Zadanie8.cs" />
     <Compile Include="Test2.cs" />
     <Compile Include="BaseTest.cs" />
