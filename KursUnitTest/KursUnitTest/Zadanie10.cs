@@ -33,36 +33,21 @@ namespace KursUnitTest
 
         Color GetColor(string strColor)
         {
-
             if (strColor.StartsWith("rgba("))
             {
-                int i1 = strColor.LastIndexOf("rgba(");
-                int i2 = strColor.LastIndexOf(")");
-
-                strColor = strColor.Substring(i1 + 5);
-
+                strColor = strColor.Substring("rgba(".Length);
                 strColor = strColor.Replace(")", "");
-
             }
             else if (strColor.StartsWith("rgb("))
             {
-                int i1 = strColor.LastIndexOf("rgb(");
-                int i2 = strColor.LastIndexOf(")");
-
-                strColor = strColor.Substring(i1 + 4);
-
+                strColor = strColor.Substring("rgb(".Length);
                 strColor = strColor.Replace(")", "");
-
             }
             var RGB = strColor.Split(',');
-
             int R = Int32.Parse(RGB[0]);
-
             int G = Int32.Parse(RGB[1]);
-
             int B = Int32.Parse(RGB[2]);
             return Color.FromArgb(R, G, B);
-
         }
 
 
@@ -71,7 +56,7 @@ namespace KursUnitTest
             Assert.True(product.PriceTextDecoration.Contains("line-through"), "Цена не перечеркнута");
 
             var color = GetColor(product.PriceFontColor);
-            Assert.True(color.R == color.G && color.G == color.B, "Цыет старой цены не серый");
+            Assert.True(color.R == color.G && color.G == color.B, "Цвет старой цены не серый");
 
             Assert.True(Int32.Parse(product.PromoPriceFontWeight) >= 700, "Акционная цена не жирная ");
 
@@ -114,7 +99,7 @@ namespace KursUnitTest
 
             var prprom = ProdPromoPrice.Text;
             int i2 = prprom.IndexOf("$");
-            prop.PromoPrice = prprom.Substring(i1 + 1);
+            prop.PromoPrice = prprom.Substring(i2 + 1);
             prop.PromoPriceFontWeight = ProdPromoPrice.GetCssValue("font-weight");
             prop.PromoPriceFontSize = ProdPromoPrice.GetCssValue("font-size");
             prop.PromoPriceFontColor = ProdPromoPrice.GetCssValue("color");
@@ -143,7 +128,7 @@ namespace KursUnitTest
             //prop.PromoPrice = Int32.Parse(ProdPrice.Text);
             var prprom = ProdPromoPrice.Text;
             int i2 = prprom.IndexOf("$");
-            prop.PromoPrice = prprom.Substring(i1 + 1);
+            prop.PromoPrice = prprom.Substring(i2 + 1);
             prop.PromoPriceFontWeight = ProdPromoPrice.GetCssValue("font-weight");
             prop.PromoPriceFontSize = ProdPromoPrice.GetCssValue("font-size");
             prop.PromoPriceFontColor = ProdPromoPrice.GetCssValue("color");
