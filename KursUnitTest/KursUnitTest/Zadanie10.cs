@@ -44,6 +44,16 @@ namespace KursUnitTest
                 strColor = strColor.Replace(")", "");
 
             }
+            else if (strColor.StartsWith("rgb("))
+            {
+                int i1 = strColor.LastIndexOf("rgb(");
+                int i2 = strColor.LastIndexOf(")");
+
+                strColor = strColor.Substring(i1 + 4);
+
+                strColor = strColor.Replace(")", "");
+
+            }
             var RGB = strColor.Split(',');
 
             int R = Int32.Parse(RGB[0]);
@@ -58,8 +68,12 @@ namespace KursUnitTest
 
         void AssertStyle(ProductInfo product)
         {
+            Assert.True(product.PriceTextDecoration.Contains("line-through"), "Цена не перечеркнута");
+
             var color = GetColor(product.PriceFontColor);
             Assert.True(color.R == color.G && color.G == color.B, "Цыет старой цены не серый");
+
+            Assert.True(Int32.Parse(product.PromoPriceFontWeight) >= 700, "Акционная цена не жирная ");
 
             var color2 = GetColor(product.PromoPriceFontColor);
             Assert.True(color2.G == 0 && color2.B == 0, "Цвет цены по акции не  красный");
@@ -88,7 +102,7 @@ namespace KursUnitTest
             var ProdPromoPrice = el.FindElement(By.CssSelector("[class='campaign-price']"));
             ProductInfo prop = new ProductInfo();
             prop.ProductName = el.FindElement(By.CssSelector("div[class='name']")).Text;
-            //prop.Price = Int32.Parse(ProdPrice.Text);
+
             var pr = ProdPrice.Text;
             int i1 = pr.IndexOf("$");
             prop.Price = pr.Substring(i1 + 1);
@@ -96,16 +110,15 @@ namespace KursUnitTest
             prop.PriceFontSize = ProdPrice.GetCssValue("font-size");
 
             prop.PriceFontColor = ProdPrice.GetCssValue("color");
-            prop.PriceTextDecoration = ProdPrice.GetCssValue("text-decoration-line");
+            prop.PriceTextDecoration = ProdPrice.GetCssValue("text-decoration");
 
-            //prop.PromoPrice = Int32.Parse(ProdPrice.Text);
             var prprom = ProdPromoPrice.Text;
             int i2 = prprom.IndexOf("$");
             prop.PromoPrice = prprom.Substring(i1 + 1);
             prop.PromoPriceFontWeight = ProdPromoPrice.GetCssValue("font-weight");
             prop.PromoPriceFontSize = ProdPromoPrice.GetCssValue("font-size");
             prop.PromoPriceFontColor = ProdPromoPrice.GetCssValue("color");
-            prop.PromoPriceTextDecoration = ProdPromoPrice.GetCssValue("text-decoration-line");
+            prop.PromoPriceTextDecoration = ProdPromoPrice.GetCssValue("text-decoration");
 
             return prop;
         }
@@ -125,7 +138,7 @@ namespace KursUnitTest
             prop.PriceFontSize = ProdPrice.GetCssValue("font-size");
 
             prop.PriceFontColor = ProdPrice.GetCssValue("color");
-            prop.PriceTextDecoration = ProdPrice.GetCssValue("text-decoration-line");
+            prop.PriceTextDecoration = ProdPrice.GetCssValue("text-decoration");
 
             //prop.PromoPrice = Int32.Parse(ProdPrice.Text);
             var prprom = ProdPromoPrice.Text;
@@ -134,7 +147,7 @@ namespace KursUnitTest
             prop.PromoPriceFontWeight = ProdPromoPrice.GetCssValue("font-weight");
             prop.PromoPriceFontSize = ProdPromoPrice.GetCssValue("font-size");
             prop.PromoPriceFontColor = ProdPromoPrice.GetCssValue("color");
-            prop.PromoPriceTextDecoration = ProdPromoPrice.GetCssValue("text-decoration-line");
+            prop.PromoPriceTextDecoration = ProdPromoPrice.GetCssValue("text-decoration");
 
             return prop;
         }
@@ -153,7 +166,7 @@ namespace KursUnitTest
             firstCampaignsProd.Click();
 
 
-            //box-product
+
             var FullProdInfo = driver.FindElement(By.CssSelector("div[id='box-product']"));
 
             var prod2 = GetFromProductPage(FullProdInfo);

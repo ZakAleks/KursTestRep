@@ -25,13 +25,13 @@ namespace KursUnitTest
         {
             ChromeOptions options = new ChromeOptions();
             //options.AddArgument("--headless");//hide browser
-            driver = new ChromeDriver(options);
-            //driver = new EdgeDriver();
+            //driver = new ChromeDriver(options);
+            driver = new EdgeDriver();
             //EdgeOptions option = new EdgeOptions();
-            //FirefoxOptions options = new FirefoxOptions();
+            //FirefoxOptions optionsf = new FirefoxOptions();
             //options.AddArgument("--headless");
-            //driver = new FirefoxDriver(options);
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            //driver = new FirefoxDriver(optionsf);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
         }
