@@ -16,8 +16,8 @@ namespace KursUnitTest
     [TestFixture]
     class Zadanie12 : BaseTest
     {
-        private readonly Random random = new Random();
-        public string GetRandomDigit(int x)
+        private static readonly Random random = new Random();
+        public static string GetRandomDigit(int x)
         {
             string code = "";
             while (code.Length < x)
@@ -32,11 +32,10 @@ namespace KursUnitTest
         [Test]
         public void Test1()
         {
-            var ranItNa = GetRandomDigit(2);
-            var ranCode = GetRandomDigit(4);
-            string Name = "testitem_" + ranItNa;
+
+            string Name = "testitem_" + Zadanie12.GetRandomDigit(2);
             string Quantity = "10";
-            string Code = "rd"+ ranCode;
+            string Code = "rd"+ Zadanie12.GetRandomDigit(4);
 
             string ImgPath = System.IO.Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
             ImgPath = Directory.GetParent(ImgPath).Parent.FullName;
