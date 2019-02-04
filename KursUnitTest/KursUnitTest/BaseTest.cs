@@ -32,7 +32,7 @@ namespace KursUnitTest
             //options.AddArgument("--headless");
             //driver = new FirefoxDriver(optionsf);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
         }
 
