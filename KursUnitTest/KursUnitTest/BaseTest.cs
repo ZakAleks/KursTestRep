@@ -25,6 +25,7 @@ namespace KursUnitTest
         {
             ChromeOptions options = new ChromeOptions();
             //options.AddArgument("--headless");//hide browser
+            options.SetLoggingPreference(LogType.Browser, LogLevel.All);
             driver = new ChromeDriver(options);
             //driver = new EdgeDriver();
             //EdgeOptions option = new EdgeOptions();
