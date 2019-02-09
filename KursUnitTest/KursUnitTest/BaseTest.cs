@@ -7,6 +7,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using KursUnitTest.app;
 
 namespace KursUnitTest
 {
@@ -14,8 +15,7 @@ namespace KursUnitTest
     //[TestFixture]
     public class BaseTest
     {
-        public IWebDriver driver;
-        public WebDriverWait wait;
+        public Application app;
 
         /// <summary>
         /// функция выполняется перед каждым тестом
@@ -23,18 +23,7 @@ namespace KursUnitTest
         [SetUp]
         public void SetUp()
         {
-            ChromeOptions options = new ChromeOptions();
-            //options.AddArgument("--headless");//hide browser
-            options.SetLoggingPreference(LogType.Browser, LogLevel.All);
-            driver = new ChromeDriver(options);
-            //driver = new EdgeDriver();
-            //EdgeOptions option = new EdgeOptions();
-            //FirefoxOptions optionsf = new FirefoxOptions();
-            //options.AddArgument("--headless");
-            //driver = new FirefoxDriver(optionsf);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-
+            app = new Application();
         }
 
         /// <summary>
@@ -51,8 +40,8 @@ namespace KursUnitTest
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
-            driver = null;
+            app.Quit();
+            app = null;
         }
 
         /// <summary>
@@ -61,7 +50,6 @@ namespace KursUnitTest
         [OneTimeTearDown]
         public void OnOneTimeTearDown()
         {
-
         }
     }
 }
