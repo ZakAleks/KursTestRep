@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace KursUnitTest
 {
     [TestFixture]
-    class Zadanie15 : BaseTest
+    class Zadanie19 : BaseTest
     {
         [Test]
         public void Test1()
